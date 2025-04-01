@@ -35,18 +35,4 @@ export default class ProductPartPricingRule extends BaseModel {
       price_adjustment: this.price_adjustment
     };
   }
-
-  /**
-   * Get the base product part in this pricing rule
-   */
-  basePart(): ProductPart | null {
-    return ProductPart.findById(this.product_part_id_base);
-  }
-
-  /**
-   * Get the dependent product part in this pricing rule
-   */
-  dependentPart(): ProductPart | null {
-    return ProductPart.findById(this.product_part_id_dep);
-  }
 }

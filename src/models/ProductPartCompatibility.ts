@@ -1,5 +1,4 @@
 import BaseModel from "./BaseModel";
-import ProductPart from "./ProductPart";
 
 export interface ProductPartCompatibilityDTO {
   id: string;
@@ -30,19 +29,5 @@ export default class ProductPartCompatibility extends BaseModel {
       product_part_id_2: this.product_part_id_2,
       is_compatible: this.is_compatible
     };
-  }
-
-  /**
-   * Get the first product part in this compatibility relationship
-   */
-  productPart1(): ProductPart | null {
-    return ProductPart.findById(this.product_part_id_1);
-  }
-
-  /**
-   * Get the second product part in this compatibility relationship
-   */
-  productPart2(): ProductPart | null {
-    return ProductPart.findById(this.product_part_id_2);
   }
 }

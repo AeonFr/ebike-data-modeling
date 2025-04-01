@@ -9,7 +9,6 @@ export interface ProductPartDTO {
   name: string;
   base_price: number;
   is_in_stock: boolean;
-  product_part_category?: ProductPartCategoryDTO;
   compatibilities?: ProductPartCompatibilityDTO[];
   pricing_rules?: ProductPartPricingRuleDTO[];
 }
@@ -38,17 +37,9 @@ export default class ProductPart extends BaseModel {
       name: this.name,
       base_price: this.base_price,
       is_in_stock: this.is_in_stock,
-      product_part_category: this.productPartCategory()?.toDto(),
       compatibilities: this.getCompatibilities().map(c => c.toDto()),
       pricing_rules: this.getPricingRules().map(rule => rule.toDto()),
     };
-  }
-
-  /**
-   * Get the product part category this part belongs to
-   */
-  productPartCategory(): ProductPartCategory | null {
-    return ProductPartCategory.findById(this.category_id);
   }
 
   /**
