@@ -14,4 +14,8 @@ export default class BaseModel {
     // return results.map(result => new this(result));
     return []; // dummy impl
   }
+
+  toDto(opts: { includeRelationships?: boolean } = {}): unknown {
+    throw new Error(`toDto() method should be implemented by the class that inherits BaseModel`);
+  }
 }
