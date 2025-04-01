@@ -61,41 +61,12 @@ export default class ProductPart extends BaseModel {
   }
 
   /**
-   * Get all pricing rules where this part is the base part
+   * Get all pricing rules relationships for this product part
    */
   getPricingRules(): ProductPartPricingRule[] {
-    return ProductPartPricingRule.findBy('product_part_id_base', this.id);
-  }
+    const asFirstPart = ProductPartPricingRule.findBy('product_part_id_base', this.id);
+    const asSecondPart = ProductPartPricingRule.findBy('product_part_id_dep', this.id);
 
-  /**
-   * Get all pricing rules where this part is the dependent part
-   */
-  getDependentPricingRules(): ProductPartPricingRule[] {
-    return ProductPartPricingRule.findBy('product_part_id_dep', this.id);
-  }
-
-  /**
-   * Calculate the price adjustment when this part is combined with another part
-   * @param otherPartId The ID of the other part to check pricing rules with
-   * @returns The price adjustment amount or 0 if no rule exists
-   */
-  getPriceAdjustmentWith(otherPartId: string): number {
-    // Check rules where this part is the base
-    const baseRules = this.getPricingRules();
-    for (const rule of baseRules) {
-      if (rule.product_part_id_dep === otherPartId) {
-        return rule.price_adjustment;
-      }
-    }
-
-    // Check rules where this part is the dependent
-    const depRules = this.getDependentPricingRules();
-    for (const rule of depRules) {
-      if (rule.product_part_id_base === otherPartId) {
-        return rule.price_adjustment;
-      }
-    }
-
-    return 0; // No pricing rule found
+    return [...asFirstPart, ...asSecondPart];
   }
 }
