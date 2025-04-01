@@ -8,18 +8,18 @@ export default class InMemoryDatabase implements Database {
   }
 
 
-  getAll<T>(): T[] {
-    return this.data;
+  getAll<T>(table: string): T[] {
+    return this.data[table];
   }
 
-  getBy<T>(_: string, field: string, value: any): T[] {
-    return this.data.filter((row: any) => {
+  getBy<T>(table: string, field: string, value: any): T[] {
+    return this.data[table].filter((row: any) => {
       return row[field] === value;
     })
   }
 
-  findById<T>(_: string, id: string): T | null {
-    return this.data.filter((row: any) => {
+  findById<T>(table: string, id: string): T | null {
+    return this.data[table].filter((row: any) => {
       return row.id === id;
     })?.[0] || null;
   }
