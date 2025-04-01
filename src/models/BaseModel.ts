@@ -13,13 +13,11 @@ export default class BaseModel {
   }
 
   static findById<T>(this: Constructor<T>, id: string): T | null {
-    return null; // dummy impl
+    return getGlobalContext().database.findById<T>(this.table, id);
   }
 
   static findBy<T>(this: Constructor<T>, field: string, value: any): T[] {
-    // const results = db.query("SELECT * FROM ? WHERE ?=?", this.table, field, value);
-    // return results.map(result => new this(result));
-    return []; // dummy impl
+    return getGlobalContext().database.getBy<T>(this.table, field, value);
   }
 
   toDto(opts: { includeRelationships?: boolean } = {}): unknown {
