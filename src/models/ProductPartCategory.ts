@@ -1,9 +1,11 @@
 import BaseModel from "./BaseModel";
+import ProductPart, { ProductPartDTO } from "./ProductPart";
 
 export interface ProductPartCategoryDTO {
   id: string;
   product_id: string;
   name: string;
+  product_parts?: ProductPartDTO[];
 }
 
 export default class ProductPartCategory extends BaseModel {
@@ -24,6 +26,14 @@ export default class ProductPartCategory extends BaseModel {
       id: this.id,
       product_id: this.product_id,
       name: this.name,
+      product_parts: this.productParts().map(part => part.toDto()),
     };
+  }
+
+  /**
+   * Get all product parts associated with this category
+   */
+  productParts(): ProductPart[] {
+    return ProductPart.findBy('category_id', this.id);
   }
 }
