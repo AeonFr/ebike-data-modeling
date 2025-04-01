@@ -24,13 +24,16 @@ export default class Product extends BaseModel {
   }
 
   // Serializes so that it can be sent through an API to the web client
-  toDto(): ProductDTO {
+  toDto(opts: { includeRelationshipts?: boolean } = {}): ProductDTO {
     return {
       id: this.id,
       name: this.name,
       base_price: this.base_price,
       description: this.description,
-      product_part_categories: this.productPartCategories().map(cat => cat.toDto()),
+      // TODO avoid N+1 queries (use a proper ORM maybe)
+      product_part_categories: opts.includeRelationshipts
+        ? this.productPartCategories().map(cat => cat.toDto())
+        : undefined,
     };
   }
 
