@@ -26,7 +26,7 @@ export default class ProductPartPricingRule extends BaseModel {
   }
 
   // Serializes so that it can be sent through an API to the web client
-  toDto(): ProductPartPricingRuleDTO {
+  toDto(opts: { includeRelationships?: boolean } = {}): ProductPartPricingRuleDTO {
     return {
       id: this.id,
       description: this.description,

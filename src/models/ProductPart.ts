@@ -30,15 +30,19 @@ export default class ProductPart extends BaseModel {
   }
 
   // Serializes so that it can be sent through an API to the web client
-  toDto(): ProductPartDTO {
+  toDto(opts: { includeRelationships?: boolean } = {}): ProductPartDTO {
     return {
       id: this.id,
       category_id: this.category_id,
       name: this.name,
       base_price: this.base_price,
       is_in_stock: this.is_in_stock,
-      compatibilities: this.getCompatibilities().map(c => c.toDto()),
-      pricing_rules: this.getPricingRules().map(rule => rule.toDto()),
+      compatibilities: opts.includeRelationships
+        ? this.getCompatibilities().map(c => c.toDto())
+        : undefined,
+      pricing_rules: opts.includeRelationships
+        ? this.getPricingRules().map(rule => rule.toDto())
+        : undefined,
     };
   }
 
