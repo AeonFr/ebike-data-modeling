@@ -1,6 +1,7 @@
 import BaseModel from "./BaseModel";
 import ProductPartCategory, { ProductPartCategoryDTO } from "./ProductPartCategory";
 import ProductPartCompatibility, { ProductPartCompatibilityDTO } from "./ProductPartCompatibility";
+import ProductPartPricingRule, { ProductPartPricingRuleDTO } from "./ProductPartPricingRule";
 
 export interface ProductPartDTO {
   id: string;
@@ -10,6 +11,7 @@ export interface ProductPartDTO {
   is_in_stock: boolean;
   product_part_category?: ProductPartCategoryDTO;
   compatibilities?: ProductPartCompatibilityDTO[];
+  pricing_rules?: ProductPartPricingRuleDTO[];
 }
 
 export default class ProductPart extends BaseModel {
@@ -38,6 +40,7 @@ export default class ProductPart extends BaseModel {
       is_in_stock: this.is_in_stock,
       product_part_category: this.productPartCategory()?.toDto(),
       compatibilities: this.getCompatibilities().map(c => c.toDto()),
+      pricing_rules: this.getPricingRules().map(rule => rule.toDto()),
     };
   }
 
@@ -55,5 +58,44 @@ export default class ProductPart extends BaseModel {
     const asFirstPart = ProductPartCompatibility.findBy('product_part_id_1', this.id);
     const asSecondPart = ProductPartCompatibility.findBy('product_part_id_2', this.id);
     return [...asFirstPart, ...asSecondPart];
+  }
+
+  /**
+   * Get all pricing rules where this part is the base part
+   */
+  getPricingRules(): ProductPartPricingRule[] {
+    return ProductPartPricingRule.findBy('product_part_id_base', this.id);
+  }
+
+  /**
+   * Get all pricing rules where this part is the dependent part
+   */
+  getDependentPricingRules(): ProductPartPricingRule[] {
+    return ProductPartPricingRule.findBy('product_part_id_dep', this.id);
+  }
+
+  /**
+   * Calculate the price adjustment when this part is combined with another part
+   * @param otherPartId The ID of the other part to check pricing rules with
+   * @returns The price adjustment amount or 0 if no rule exists
+   */
+  getPriceAdjustmentWith(otherPartId: string): number {
+    // Check rules where this part is the base
+    const baseRules = this.getPricingRules();
+    for (const rule of baseRules) {
+      if (rule.product_part_id_dep === otherPartId) {
+        return rule.price_adjustment;
+      }
+    }
+
+    // Check rules where this part is the dependent
+    const depRules = this.getDependentPricingRules();
+    for (const rule of depRules) {
+      if (rule.product_part_id_base === otherPartId) {
+        return rule.price_adjustment;
+      }
+    }
+
+    return 0; // No pricing rule found
   }
 }
