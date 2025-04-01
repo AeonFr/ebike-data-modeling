@@ -16,6 +16,8 @@ export default class ProductPartPricingRule extends BaseModel {
   readonly product_part_id_dep: string;
   readonly price_adjustment: number;
 
+  static readonly table = "product_part_pricing_rules";
+
   constructor(pricingRuleDto: ProductPartPricingRuleDTO) {
     super();
     this.id = pricingRuleDto.id;

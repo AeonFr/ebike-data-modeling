@@ -13,6 +13,8 @@ export default class ProductPartCategory extends BaseModel {
   readonly product_id: string;
   readonly name: string;
 
+  static readonly table = "product_part_categories";
+
   constructor(productPartCategoryDto: ProductPartCategoryDTO) {
     super();
     this.id = productPartCategoryDto.id;

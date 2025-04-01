@@ -15,6 +15,8 @@ export default class Product extends BaseModel {
   readonly base_price: number;
   readonly description: string;
 
+  static readonly table = "products";
+
   constructor(productDto: ProductDTO) {
     super();
     this.id = productDto.id;

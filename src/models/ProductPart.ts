@@ -20,6 +20,8 @@ export default class ProductPart extends BaseModel {
   readonly base_price: number;
   readonly is_in_stock: boolean;
 
+  static readonly table = "product_parts";
+
   constructor(productPartDto: ProductPartDTO) {
     super();
     this.id = productPartDto.id;

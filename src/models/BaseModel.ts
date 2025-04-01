@@ -1,8 +1,15 @@
-type Constructor<T> = { new(...args: any): T }
+import { getGlobalContext } from "../context/Context";
+
+type Constructor<T> = {
+  new(...args: any): T;
+  table: string;
+}
 
 export default class BaseModel {
+  static readonly table: string;
+
   static getAll<T>(this: Constructor<T>): T[] {
-    return [] // dummy impl
+    return getGlobalContext().database.getAll(this.table);
   }
 
   static findById<T>(this: Constructor<T>, id: string): T | null {

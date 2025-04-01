@@ -13,6 +13,8 @@ export default class ProductPartCompatibility extends BaseModel {
   readonly product_part_id_2: string;
   readonly is_compatible: boolean;
 
+  static readonly table = "product_part_compatibilities";
+
   constructor(compatibilityDto: ProductPartCompatibilityDTO) {
     super();
     this.id = compatibilityDto.id;
