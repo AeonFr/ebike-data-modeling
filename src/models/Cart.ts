@@ -25,6 +25,6 @@ export default class Cart extends BaseModel {
    * Get all cart items associated with this cart
    */
   cartItems(): CartItem[] {
-    return CartItem.findBy('cart_id', this.id);
+    return CartItem.getBy('cart_id', this.id);
   }
 }

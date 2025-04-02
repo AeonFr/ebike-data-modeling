@@ -50,7 +50,7 @@ export default class CartItem extends BaseModel {
    * Get all product parts associated with this cart item
    */
   productParts(): CartItemProductPart[] {
-    return CartItemProductPart.findBy('cart_item_id', this.id);
+    return CartItemProductPart.getBy('cart_item_id', this.id);
   }
 
   /**

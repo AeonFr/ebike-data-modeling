@@ -5,11 +5,17 @@ import InMemoryDatabase from '../database/InMemoryDatabase';
 
 
 describe('BaseModel', () => {
-  class BaseModelWithTable extends BaseModel {
+  class Row extends BaseModel {
     static readonly table = "table";
 
-    constructor() {
+    id: string;
+    name: string;
+
+    constructor(row: { id: string; name: string }) {
       super();
+
+      this.id = row.id;
+      this.name = row.name
     }
   }
 
@@ -29,24 +35,26 @@ describe('BaseModel', () => {
 
   describe('getAll', () => {
     it('returns all results', () => {
-      expect(BaseModelWithTable.getAll()).toEqual(tableData);
+      expect(Row.getAll()).toEqual(
+        tableData.map(row => new Row(row))
+      );
     })
   })
 
   describe('findById', () => {
     it('returns the item with matching id', () => {
-      expect(BaseModelWithTable.findById('1')).toEqual(tableData[0]);
-      expect(BaseModelWithTable.findById('2')).toEqual(tableData[1]);
-      expect(BaseModelWithTable.findById('3')).toBeNull();
+      expect(Row.findById('1')).toEqual(new Row(tableData[0]));
+      expect(Row.findById('2')).toEqual(new Row(tableData[1]));
+      expect(Row.findById('3')).toBeNull();
     });
   });
 
-  describe('findBy', () => {
+  describe('getBy', () => {
     it('returns items with matching field value', () => {
-      expect(BaseModelWithTable.findBy('name', 'foo')).toEqual([tableData[0]]);
-      expect(BaseModelWithTable.findBy('name', 'bar')).toEqual([tableData[1]]);
-      expect(BaseModelWithTable.findBy('name', 'baz')).toEqual([]);
-      expect(BaseModelWithTable.findBy('id', '1')).toEqual([tableData[0]]);
+      expect(Row.getBy('name', 'foo')).toEqual([new Row(tableData[0])]);
+      expect(Row.getBy('name', 'bar')).toEqual([new Row(tableData[1])]);
+      expect(Row.getBy('name', 'baz')).toEqual([]);
+      expect(Row.getBy('id', '1')).toEqual([new Row(tableData[0])]);
     });
   });
 })

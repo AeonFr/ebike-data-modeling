@@ -32,8 +32,8 @@ export default class ProductPart extends BaseModel {
    * Get all compatibility relationships for this product part
    */
   getCompatibilities(): ProductPartCompatibility[] {
-    const asFirstPart = ProductPartCompatibility.findBy('product_part_id_1', this.id);
-    const asSecondPart = ProductPartCompatibility.findBy('product_part_id_2', this.id);
+    const asFirstPart = ProductPartCompatibility.getBy('product_part_id_1', this.id);
+    const asSecondPart = ProductPartCompatibility.getBy('product_part_id_2', this.id);
     return [...asFirstPart, ...asSecondPart];
   }
 
@@ -41,8 +41,8 @@ export default class ProductPart extends BaseModel {
    * Get all pricing rules relationships for this product part
    */
   getPricingRules(): ProductPartPricingRule[] {
-    const asFirstPart = ProductPartPricingRule.findBy('product_part_id_1', this.id);
-    const asSecondPart = ProductPartPricingRule.findBy('product_part_id_2', this.id);
+    const asFirstPart = ProductPartPricingRule.getBy('product_part_id_1', this.id);
+    const asSecondPart = ProductPartPricingRule.getBy('product_part_id_2', this.id);
 
     return [...asFirstPart, ...asSecondPart];
   }

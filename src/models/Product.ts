@@ -28,6 +28,6 @@ export default class Product extends BaseModel {
    * Get all product part categories associated with this product
    */
   productPartCategories(): ProductPartCategory[] {
-    return ProductPartCategory.findBy('product_id', this.id);
+    return ProductPartCategory.getBy('product_id', this.id);
   }
 }
