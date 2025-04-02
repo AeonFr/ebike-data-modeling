@@ -1,7 +1,7 @@
 import BaseModel from "./BaseModel";
 import ProductPart from "./ProductPart";
 
-export interface ProductPartPricingRuleDTO {
+export interface ProductPartPricingRuleDB {
   id: string;
   description: string;
   product_part_id_base: string;
@@ -18,12 +18,12 @@ export default class ProductPartPricingRule extends BaseModel {
 
   static readonly table = "product_part_pricing_rules";
 
-  constructor(pricingRuleDto: ProductPartPricingRuleDTO) {
+  constructor(pricingRuleDB: ProductPartPricingRuleDB) {
     super();
-    this.id = pricingRuleDto.id;
-    this.description = pricingRuleDto.description;
-    this.product_part_id_base = pricingRuleDto.product_part_id_base;
-    this.product_part_id_dep = pricingRuleDto.product_part_id_dep;
-    this.price_adjustment = pricingRuleDto.price_adjustment;
+    this.id = pricingRuleDB.id;
+    this.description = pricingRuleDB.description;
+    this.product_part_id_base = pricingRuleDB.product_part_id_base;
+    this.product_part_id_dep = pricingRuleDB.product_part_id_dep;
+    this.price_adjustment = pricingRuleDB.price_adjustment;
   }
 }

@@ -1,11 +1,11 @@
 import BaseModel from "./BaseModel";
-import ProductPart, { ProductPartDTO } from "./ProductPart";
+import ProductPart, { ProductPartDB } from "./ProductPart";
 
-export interface ProductPartCategoryDTO {
+export interface ProductPartCategoryDB {
   id: string;
   product_id: string;
   name: string;
-  product_parts?: ProductPartDTO[];
+  product_parts?: ProductPartDB[];
 }
 
 export default class ProductPartCategory extends BaseModel {
@@ -15,11 +15,11 @@ export default class ProductPartCategory extends BaseModel {
 
   static readonly table = "product_part_categories";
 
-  constructor(productPartCategoryDto: ProductPartCategoryDTO) {
+  constructor(productPartCategoryDB: ProductPartCategoryDB) {
     super();
-    this.id = productPartCategoryDto.id;
-    this.product_id = productPartCategoryDto.product_id;
-    this.name = productPartCategoryDto.name;
+    this.id = productPartCategoryDB.id;
+    this.product_id = productPartCategoryDB.product_id;
+    this.name = productPartCategoryDB.name;
   }
 
   /**

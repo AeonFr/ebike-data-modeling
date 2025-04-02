@@ -1,6 +1,6 @@
 import BaseModel from "./BaseModel";
 
-export interface ProductPartCompatibilityDTO {
+export interface ProductPartCompatibilityDB {
   id: string;
   product_part_id_1: string;
   product_part_id_2: string;
@@ -15,11 +15,11 @@ export default class ProductPartCompatibility extends BaseModel {
 
   static readonly table = "product_part_compatibilities";
 
-  constructor(compatibilityDto: ProductPartCompatibilityDTO) {
+  constructor(compatibilityDB: ProductPartCompatibilityDB) {
     super();
-    this.id = compatibilityDto.id;
-    this.product_part_id_1 = compatibilityDto.product_part_id_1;
-    this.product_part_id_2 = compatibilityDto.product_part_id_2;
-    this.is_compatible = compatibilityDto.is_compatible;
+    this.id = compatibilityDB.id;
+    this.product_part_id_1 = compatibilityDB.product_part_id_1;
+    this.product_part_id_2 = compatibilityDB.product_part_id_2;
+    this.is_compatible = compatibilityDB.is_compatible;
   }
 }

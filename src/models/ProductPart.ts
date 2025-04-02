@@ -1,16 +1,16 @@
 import BaseModel from "./BaseModel";
-import ProductPartCategory, { ProductPartCategoryDTO } from "./ProductPartCategory";
-import ProductPartCompatibility, { ProductPartCompatibilityDTO } from "./ProductPartCompatibility";
-import ProductPartPricingRule, { ProductPartPricingRuleDTO } from "./ProductPartPricingRule";
+import ProductPartCategory, { ProductPartCategoryDB } from "./ProductPartCategory";
+import ProductPartCompatibility, { ProductPartCompatibilityDB } from "./ProductPartCompatibility";
+import ProductPartPricingRule, { ProductPartPricingRuleDB } from "./ProductPartPricingRule";
 
-export interface ProductPartDTO {
+export interface ProductPartDB {
   id: string;
   category_id: string;
   name: string;
   base_price: number;
   is_in_stock: boolean;
-  compatibilities?: ProductPartCompatibilityDTO[];
-  pricing_rules?: ProductPartPricingRuleDTO[];
+  compatibilities?: ProductPartCompatibilityDB[];
+  pricing_rules?: ProductPartPricingRuleDB[];
 }
 
 export default class ProductPart extends BaseModel {
@@ -22,13 +22,13 @@ export default class ProductPart extends BaseModel {
 
   static readonly table = "product_parts";
 
-  constructor(productPartDto: ProductPartDTO) {
+  constructor(productPartDB: ProductPartDB) {
     super();
-    this.id = productPartDto.id;
-    this.category_id = productPartDto.category_id;
-    this.name = productPartDto.name;
-    this.base_price = productPartDto.base_price;
-    this.is_in_stock = productPartDto.is_in_stock;
+    this.id = productPartDB.id;
+    this.category_id = productPartDB.category_id;
+    this.name = productPartDB.name;
+    this.base_price = productPartDB.base_price;
+    this.is_in_stock = productPartDB.is_in_stock;
   }
 
   /**
