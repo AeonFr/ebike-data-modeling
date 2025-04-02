@@ -41,8 +41,8 @@ export default class ProductPart extends BaseModel {
    * Get all pricing rules relationships for this product part
    */
   getPricingRules(): ProductPartPricingRule[] {
-    const asFirstPart = ProductPartPricingRule.findBy('product_part_id_base', this.id);
-    const asSecondPart = ProductPartPricingRule.findBy('product_part_id_dep', this.id);
+    const asFirstPart = ProductPartPricingRule.findBy('product_part_id_1', this.id);
+    const asSecondPart = ProductPartPricingRule.findBy('product_part_id_2', this.id);
 
     return [...asFirstPart, ...asSecondPart];
   }
