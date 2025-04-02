@@ -191,7 +191,12 @@ describe('ProductPresenter', () => {
   describe('toDTO', () => {
     it('returns the product, with all its relationships, formatted as a DTO (Data Transfer Object)', () => {
       const product = Product.findById('1');
-      const productPresenter = new ProductPresenter(product!);
+
+      if (!product) {
+        throw new Error(`Product not found`);
+      }
+
+      const productPresenter = new ProductPresenter(product);
 
       expect(productPresenter.toDTO()).toEqual({
         id: '1',

@@ -69,8 +69,8 @@ export default class ProductPresenter {
       // reference the ID of the *other* product to get incompatible products
       .map(partCompatibility => (
         partCompatibility.product_part_id_2 === productPart.id ?
-          partCompatibility.product_part_id_2
-          : partCompatibility.product_part_id_1
+          partCompatibility.product_part_id_1
+          : partCompatibility.product_part_id_2
       ));
   }
 
@@ -80,8 +80,8 @@ export default class ProductPresenter {
     return productPartPricingRules
       .map(pricingRule => ({
         partId: pricingRule.product_part_id_2 === productPart.id ?
-          pricingRule.product_part_id_2
-          : pricingRule.product_part_id_1,
+          pricingRule.product_part_id_1
+          : pricingRule.product_part_id_2,
         priceAdjustment: pricingRule.price_adjustment,
       }));
   }
