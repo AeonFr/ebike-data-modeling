@@ -5,7 +5,6 @@ export interface ProductPartCategoryDB {
   id: string;
   product_id: string;
   name: string;
-  product_parts?: ProductPartDB[];
 }
 
 export default class ProductPartCategory extends BaseModel {

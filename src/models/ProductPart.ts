@@ -9,8 +9,6 @@ export interface ProductPartDB {
   name: string;
   base_price: number;
   is_in_stock: boolean;
-  compatibilities?: ProductPartCompatibilityDB[];
-  pricing_rules?: ProductPartPricingRuleDB[];
 }
 
 export default class ProductPart extends BaseModel {

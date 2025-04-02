@@ -10,7 +10,6 @@ export interface CartItemDB {
   quantity: number;
   unit_price: number;
   created_at: string;
-  product_parts?: CartItemProductPartDB[];
 }
 
 export default class CartItem extends BaseModel {
