@@ -31,23 +31,6 @@ export default class ProductPart extends BaseModel {
     this.is_in_stock = productPartDto.is_in_stock;
   }
 
-  // Serializes so that it can be sent through an API to the web client
-  toDto(opts: { includeRelationships?: boolean } = {}): ProductPartDTO {
-    return {
-      id: this.id,
-      category_id: this.category_id,
-      name: this.name,
-      base_price: this.base_price,
-      is_in_stock: this.is_in_stock,
-      compatibilities: opts.includeRelationships
-        ? this.getCompatibilities().map(c => c.toDto())
-        : undefined,
-      pricing_rules: opts.includeRelationships
-        ? this.getPricingRules().map(rule => rule.toDto())
-        : undefined,
-    };
-  }
-
   /**
    * Get all compatibility relationships for this product part
    */

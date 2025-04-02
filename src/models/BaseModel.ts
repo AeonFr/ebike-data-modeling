@@ -19,8 +19,4 @@ export default class BaseModel {
   static findBy<T>(this: Constructor<T>, field: string, value: any): T[] {
     return getGlobalContext().database.getBy<T>(this.table, field, value);
   }
-
-  toDto(opts: { includeRelationships?: boolean } = {}): unknown {
-    throw new Error(`toDto() method should be implemented by the class that inherits BaseModel`);
-  }
 }

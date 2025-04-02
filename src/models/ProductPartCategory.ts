@@ -22,18 +22,6 @@ export default class ProductPartCategory extends BaseModel {
     this.name = productPartCategoryDto.name;
   }
 
-  // Serializes so that it can be sent through an API to the web client
-  toDto(opts: { includeRelationships?: boolean } = {}): ProductPartCategoryDTO {
-    return {
-      id: this.id,
-      product_id: this.product_id,
-      name: this.name,
-      product_parts: opts.includeRelationships
-        ? this.productParts().map(part => part.toDto())
-        : undefined,
-    };
-  }
-
   /**
    * Get all product parts associated with this category
    */

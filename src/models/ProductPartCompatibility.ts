@@ -22,14 +22,4 @@ export default class ProductPartCompatibility extends BaseModel {
     this.product_part_id_2 = compatibilityDto.product_part_id_2;
     this.is_compatible = compatibilityDto.is_compatible;
   }
-
-  // Serializes so that it can be sent through an API to the web client
-  toDto(opts: { includeRelationships?: boolean } = {}): ProductPartCompatibilityDTO {
-    return {
-      id: this.id,
-      product_part_id_1: this.product_part_id_1,
-      product_part_id_2: this.product_part_id_2,
-      is_compatible: this.is_compatible
-    };
-  }
 }
