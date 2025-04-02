@@ -1,6 +1,4 @@
 import BaseModel from "./BaseModel";
-import Cart from "./Cart";
-import Product from "./Product";
 import CartItemProductPart from "./CartItemProductPart";
 
 export interface CartItemDB {
@@ -33,20 +31,6 @@ export default class CartItem extends BaseModel {
   }
 
   /**
-   * Get the cart this item belongs to
-   */
-  cart(): Cart | null {
-    return Cart.findById(this.cart_id);
-  }
-
-  /**
-   * Get the product associated with this cart item
-   */
-  product(): Product | null {
-    return Product.findById(this.product_id);
-  }
-
-  /**
    * Get all product parts associated with this cart item
    */
   productParts(): CartItemProductPart[] {
@@ -54,9 +38,13 @@ export default class CartItem extends BaseModel {
   }
 
   /**
-   * Calculate the total price for this cart item
+   * Placeholder method, TODO implement
    */
-  getTotalPrice(): number {
-    return this.unit_price * this.quantity;
+  static create(cartItem: Omit<CartItemDB, "id">) {
+    const id = new Date().toISOString();
+    return new this({
+      id,
+      ...cartItem
+    });
   }
 }
