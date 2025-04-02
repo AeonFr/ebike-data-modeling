@@ -1,7 +1,7 @@
 import BaseModel from "./BaseModel";
 import Cart from "./Cart";
 import Product from "./Product";
-import CartItemProductPart, { CartItemProductPartDB } from "./CartItemProductPart";
+import CartItemProductPart from "./CartItemProductPart";
 
 export interface CartItemDB {
   id: string;

@@ -1,7 +1,6 @@
 import BaseModel from "./BaseModel";
-import ProductPartCategory, { ProductPartCategoryDB } from "./ProductPartCategory";
-import ProductPartCompatibility, { ProductPartCompatibilityDB } from "./ProductPartCompatibility";
-import ProductPartPricingRule, { ProductPartPricingRuleDB } from "./ProductPartPricingRule";
+import ProductPartCompatibility from "./ProductPartCompatibility";
+import ProductPartPricingRule from "./ProductPartPricingRule";
 
 export interface ProductPartDB {
   id: string;

@@ -1,5 +1,5 @@
 import BaseModel from "./BaseModel";
-import CartItem, { CartItemDB } from "./CartItem";
+import CartItem from "./CartItem";
 
 export interface CartDB {
   id: string;

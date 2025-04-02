@@ -1,5 +1,5 @@
 import BaseModel from "./BaseModel";
-import ProductPartCategory, { ProductPartCategoryDB } from "./ProductPartCategory";
+import ProductPartCategory from "./ProductPartCategory";
 
 export interface ProductDB {
   id: string;
